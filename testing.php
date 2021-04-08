@@ -9,8 +9,8 @@
 
 <?php
 // define variables and set to empty values
-$nameErr = $emailErr = $genderErr = $websiteErr = $passErr = $cpasswordErr = "";
-$name = $email = $gender = $comment = $website = $password = $cpassword = "";
+$nameErr = $emailErr = $genderErr = $address_err = $websiteErr = "";
+$name = $email = $gender = $address = $website = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["name"])) {
@@ -32,25 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $emailErr = "Invalid email format";
     }
   }
-   if(!empty($_POST["password"]) && ($_POST["password"] == $_POST["cpassword"])) {
-        $password = test_input($_POST["password"]);
-        $cpassword = test_input($_POST["cpassword"]);
-        if (strlen($_POST["password"]) <= '8') {
-            $passwordErr = "Your Password Must Contain At Least 8 Characters!";
-        }
-        elseif(!preg_match("#[0-9]+#",$password)) {
-            $passwordErr = "Your Password Must Contain At Least 1 Number!";
-        }
-        elseif(!preg_match("#[A-Z]+#",$password)) {
-            $passwordErr = "Your Password Must Contain At Least 1 Capital Letter!";
-        }
-        elseif(!preg_match("#[a-z]+#",$password)) {
-            $passwordErr = "Your Password Must Contain At Least 1 Lowercase Letter!";
-        } else {
-            $cpasswordErr = "Please Check You've Entered Or Confirmed Your Password!";
-        }
-    }
-    
+   
   if (empty($_POST["website"])) {
     $website = "";
   } else {
@@ -61,11 +43,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 
-  if (empty($_POST["comment"])) {
-    $comment = "";
-  } else {
-    $comment = test_input($_POST["comment"]);
-  }
+    
+    if(empty($_POST["address"])){
+    $address="";
+   } else{
+      $address = test_input($_POST["address"]);
+      if (!preg_match("/[A-Za-z0-9\-\\,.]+/",$address)){ 
+      $address_err = "Please enter an address.";     
+    }
+ }
+        
 
   if (empty($_POST["gender"])) {
     $genderErr = "Gender is required";
@@ -91,16 +78,12 @@ function test_input($data) {
   E-mail: <input type="email" name="email" value="<?php echo $email;?>">
   <span class="error">* <?php echo $emailErr;?></span>
   <br><br>
-  Password: <input type="password" name="password" value="<?php echo $password;?>">
-  <span class="error">* <?php echo $passwordErr;?></span>
-  <br><br>
-   confirm Password: <input type="password" name="cpassword" value="<?php echo $cpassword;?>">
-  <span class="error">* <?php echo $cpasswordErr;?></span>
-  <br><br>
+
   Website: <input type="text" name="website" value="<?php echo $website;?>">
   <span class="error"><?php echo $websiteErr;?></span>
   <br><br>
-  Comment: <textarea name="comment" rows="5" cols="40"><?php echo $comment;?></textarea>
+  Address: <input type="text" name="address" value="<?php echo $address;?>">
+   <span class="error"><?php echo $address_err;?></span>
   <br><br>
   Gender:
   <input type="radio" name="gender" <?php if (isset($gender) && $gender=="female") echo "checked";?> value="female">Female
@@ -110,23 +93,5 @@ function test_input($data) {
   <br><br>
   <input type="submit" name="submit" value="Submit">  
 </form>
-
-<?php
-echo "<h2>Your Input:</h2>";
-echo $name;
-echo "<br>";
-echo $email;
-echo "<br>";
-echo $password;
-echo "<br>";
-echo $email;
-echo "<br>";
-echo $website;
-echo "<br>";
-echo $comment;
-echo "<br>";
-echo $gender;
-?>
-
 </body>
 </html>
