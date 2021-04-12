@@ -23,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
   
+  
   if (empty($_POST["email"])) {
     $emailErr = "Email is required";
   } else {
@@ -71,7 +72,7 @@ function test_input($data) {
 
 <h2>PHP Form Validation Example</h2>
 <p><span class="error">* required field</span></p>
-<form method="post" action="connection.php">  
+<form method="POST" action="database.php">  
   Name: <input type="text" name="name" value="<?php echo $name;?>">
   <span class="error">* <?php echo $nameErr;?></span>
   <br><br>

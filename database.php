@@ -1,7 +1,7 @@
  <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Personal details</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -30,25 +30,7 @@
                     <div class="mt-5 mb-3 clearfix">
                         <h2 class="heading">Personal details</h2>
  <?php
-  
-        // servername => localhost
-        // username => root
-        // password => empty
-        // database name => crezteddb
-        $conn = mysqli_connect("localhost", "root", "1234", "createdb");
-          // create function for generate random password
-			function generate_password($len = 6){
-			 $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-			 $password = substr( str_shuffle( $chars ), 0, $len );
-			  $enc_pass = md5($password);
-			 return $password;
-			}
-
-        // Check connection
-        if($conn === false){
-            die("ERROR: Could not connect. " 
-                . mysqli_connect_error());
-        }
+        include"conn.php";
           
         // Taking all 5 values from the form data(input)
         $name =  $_REQUEST['name'];
@@ -61,14 +43,11 @@
 
           
         // Performing insert query execution
-        // here our table name is college
-        $sql = "INSERT INTO form_data  VALUES ('$name', 
-            ' $email','$website','$address','$gender' , '$password')";
+            $sql = "INSERT INTO form_data (name, email, website, address, gender, password) VALUES ('$name', '$email','$website','$address','$gender' , '$password')";
+
           
         if(mysqli_query($conn, $sql)){
-  /*
-            echo nl2br("\n$name\n $email\n$password\n$cpassword\n"
-                . "\n$website\n$address\n$gender\n");*/
+
         } else{
             echo "ERROR: Hush! Sorry $sql. " 
                 . mysqli_error($conn);
@@ -95,8 +74,8 @@
                                         echo "<td>" . $row['address'] . "</td>";
                                         echo "<td>" . $row['gender'] . "</td>";
                                         echo "<td>";
-                                            echo '<a href="update.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                            echo '<a href="#?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                            echo '<a href="update1.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                            echo '<a href="delete.php?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                         echo "</td>";
                                     echo "</tr>";
                                 }
@@ -111,7 +90,7 @@
                         echo "Oops! Something went wrong. Please try again later.";
                     }
 
-          
+
         // Close connection
         mysqli_close($conn);
         ?>
