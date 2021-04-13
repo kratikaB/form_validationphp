@@ -70,7 +70,7 @@
          ?>
       <h2>PHP Form Validation Example</h2>
       <p><span class="error">* required field</span></p>
-      <form method="POST" action="database.php">  
+      <form method="POST" action="insert.php">  
          Name: <input type="text" name="name" value="<?php echo $name;?>">
          <span class="error">* <?php echo $nameErr;?></span>
          <br><br>
@@ -80,7 +80,7 @@
          Website: <input type="text" name="website" value="<?php echo $website;?>">
          <span class="error"><?php echo $websiteErr;?></span>
          <br><br>
-         Address: <input type="text" name="address" value="<?php echo $address;?>">
+         Address: <textarea rows="5" name="address" value="<?php echo $address;?>"></textarea>
          <span class="error"><?php echo $address_err;?></span>
          <br><br>
          Gender:
@@ -89,7 +89,7 @@
          <input type="radio" name="gender" <?php if (isset($gender) && $gender=="other") echo "checked";?> value="other">Other  
          <span class="error">* <?php echo $genderErr;?></span>
          <br><br>
-         <input type="submit" name="submit" value="Submit">  
+         <input type="submit" name="submit" value="submit">  
       </form>
    </body>
 </html>
