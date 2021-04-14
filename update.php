@@ -1,18 +1,20 @@
 <?php
 include "conn.php"; 
 if(isset($_POST['update']))
-{  
-                     $name =  $_POST['name'];
-                     $email = $_POST['email'];
-                     $website = $_POST['website'];
-                     $address = $_POST['address'];
-                     $gender = $_POST['gender'];
-                  
-        $result = mysqli_query($conn, "UPDATE details SET name='$name', email='$email' , website='$website' , address='$address' , gender='$gender' WHERE id=$id");
+{         
+        
+    $id= $_GET['id'];
+    $name =  $_POST['name'];
+    $email = $_POST['email'];
+    $website = $_POST['website'];
+    $address = $_POST['address'];
+    $gender = $_POST['gender'];
+
+    $result = mysqli_query($conn, "UPDATE form_data SET name='$name', email='$email' , website='$website' , address='$address' , gender='$gender' WHERE id=$id");
         
      
-        header("Location: Read.php");
-    }
+    header("Location: Read.php");
+}
 
 ?>
 <?php
@@ -25,7 +27,6 @@ $result = mysqli_query($conn, "SELECT * FROM form_data WHERE id=$id");
  
 while($n = mysqli_fetch_array($result))
 {
-            $id = $n['id'];
             $name = $n['name'];
             $email = $n['email'];
             $website = $n['website'];
@@ -81,18 +82,24 @@ while($n = mysqli_fetch_array($result))
 
             <tr>
                 <td>address</td>
-                <td><input type="text" name="address" value="<?php echo $address;?>"></td>
+                <td><textarea rows="5" name="address"><?php echo htmlspecialchars($address);?></textarea></td>
             </tr>
             <tr>
                 <td>Gender</td>
-                <td><input type="text" name="gender" value="<?php echo $gender;?>"></td>
+                <td>
+                    <input type="radio" name="gender" value="Male" <?php if($gender=='male'){?>checked="checked"<?php }?>>Male
+                     <input type="radio" name="gender" value="Female" <?php if($gender=='female'){?>checked="checked"<?php }?>>Female
+                    <input type="radio" name="gender" value="Other" <?php if($gender=='other'){?>checked="checked"<?php }?>>Other
+
+                </td>
+
             </tr>
 
             <tr>
-                <td><input type="hidden" name="id" value=<?php echo $_GET['id '];?>></td>
+                <td><input type="hidden" name="id" value=<?php echo $_GET['edit'];?>></td>
 
                 <td>
-                    <input type="submit" name="update" class="btn btn-primary" value="Update">
+                    <input type="submit" name="update" class="btn btn-primary" value="update">
                 </td>
             </tr>
         </table>

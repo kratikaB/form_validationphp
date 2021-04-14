@@ -54,7 +54,7 @@
                                                                     echo "<td>" . $row['address'] . "</td>";
                                                                     echo "<td>" . $row['gender'] . "</td>";
                                                                     echo "<td>";
-                                                                        echo '<a href="update.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                                                        echo '<a href="update.php?id='. $row['id'] .'" class="mr-3" title="UpdateRecord" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
                                                                         ?> <a href="delete.php?id=<?php echo $row['id'] ?>"   onclick="return confirm('Are you sure?');" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>
                   <?php
                      echo "</td>";
