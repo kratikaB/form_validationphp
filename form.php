@@ -11,7 +11,7 @@
          $nameErr = $emailErr = $genderErr = $address_err = $websiteErr = "";
          $name = $email = $gender = $address = $website = "";
          
-         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+         // if ($_SERVER["REQUEST_METHOD"] == "POST") {
            if (empty($_POST["name"])) {
              $nameErr = "Name is required";
            } else {
@@ -59,7 +59,7 @@
            } else {
              $gender = test_input($_POST["gender"]);
            }
-         }
+         // }
          
          function test_input($data) {
            $data = trim($data);
