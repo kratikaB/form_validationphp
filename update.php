@@ -87,8 +87,8 @@ while($n = mysqli_fetch_array($result))
             <tr>
                 <td>Gender</td>
                 <td>
-                    <input type="radio" name="gender" value="Male" <?php if($gender=='male'){?>checked="checked"<?php }?>>Male
-                     <input type="radio" name="gender" value="Female" <?php if($gender=='female'){?>checked="checked"<?php }?>>Female
+                    <input type="radio" name="gender" value="male" <?php if($gender=='male'){?>checked="checked"<?php }?>>Male
+                     <input type="radio" name="gender" value="female" <?php if($gender=='female'){?>checked="checked"<?php }?>>Female
                     <input type="radio" name="gender" value="Other" <?php if($gender=='other'){?>checked="checked"<?php }?>>Other
 
                 </td>

@@ -45,7 +45,7 @@
          
              
              if(empty($_POST["address"])){
-             $address="";
+             $address="address is required";
             } else{
                $address = test_input($_POST["address"]);
                if (!preg_match("/[A-Za-z0-9\-\\,.]+/",$address)){ 
@@ -78,10 +78,10 @@
          <span class="error">* <?php echo $emailErr;?></span>
          <br><br>
          Website: <input type="text" name="website" value="<?php echo $website;?>">
-         <span class="error"><?php echo $websiteErr;?></span>
+         <span class="error">*website is required <?php echo $websiteErr;?></span>
          <br><br>
          Address: <textarea rows="5" name="address" value="<?php echo $address;?>"></textarea>
-         <span class="error"><?php echo $address_err;?></span>
+         <span class="error">*address is required <?php echo $address_err;?></span>
          <br><br>
          Gender:
          <input type="radio" name="gender" <?php if (isset($gender) && $gender=="female") echo "checked";?> value="female">Female
